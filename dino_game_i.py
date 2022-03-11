@@ -1,6 +1,14 @@
 from microbit import *
 import random
 
+def pix_up(x, y):
+    display.set_pixel(x, y, 9)
+    display.set_pixel(x-1, y-1, 0)
+
+def pix_down(x, y):
+    display.set_pixel(x, y, 9)
+    display.set_pixel(x+1, y+1, 0)
+
 y = 0
 time = 500
 a = 0
@@ -11,8 +19,6 @@ while True:
     #Sprung
     if button_a.get_presses():
         display.set_pixel(0, 2, 9)
-        display.set_pixel(0, 3, 9)
-        display.set_pixel(0, 4, 0)
         sleep(time)
         display.set_pixel(0, 2, 0)
     #Ducken
@@ -87,3 +93,4 @@ while True:
         a = 0
     display.set_pixel(0, 4, 0)
 
+#BACKUP
