@@ -2,7 +2,6 @@ from microbit import *
 import random
 
 jump = 0
-limiter_c_or_b = 0
 time = 800
 cactus_x_i = 4
 bat_x_i = 4
@@ -63,7 +62,7 @@ while True:
             cactus_x_i = 4
             cactus_or_bat = random.randint(-1, 2)
 
-    if cactus_or_bat == 1:
+    elif cactus_or_bat == 1:
         #Bat
         if running_time() % time == 0:
             display.set_pixel(bat_x_i, 3, 5)
@@ -79,8 +78,13 @@ while True:
         cactus_or_bat = 0
 
     """
+    #Getting harder
+    if running_time()
+
+    #Game Over
     if cactus_x_i == dino_i or cactus_x_i == dino_ii or bat_x_i == dino_i or bat_x_i == dino_ii:
         display.scroll("Game Over")
+        display.clear()
     """
     sleep(1)
 #BACKUP
