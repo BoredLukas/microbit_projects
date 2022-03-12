@@ -15,6 +15,7 @@ bat_i_or_bat_ii = 0
 while True:
 
     #Dino
+
     #Jump
     if button_a.get_presses():
         jump_time = running_time()
@@ -22,8 +23,10 @@ while True:
         display.set_pixel(0, 4, 0)
         dino_i = 2
         dino_ii = 3
+
         #Jump_time_Start
         jump = 1
+
     #Crouch
     elif button_b.is_pressed():
         display.set_pixel(0, 3, 0)
@@ -31,16 +34,23 @@ while True:
         dino_i = 4
         dino_ii = 4
         jump = 3
-    else:
+
+    if jump == 3 and not button_b.is_pressed():
+        jump = 0
+
     #Run
+    if jump == 0:
         display.set_pixel(0, 3, 9)
         display.set_pixel(0, 4, 9)
         dino_i = 3
         dino_ii = 4
+
     #Jump_time_Stop
     if jump == 1 and jump_time + time * 1.5 == running_time():
         jump = 0
         display.set_pixel(0, 2, 0)
+
+    #Cactus and Bats
 
     if cactus_or_bat == 0:
         #Cactus
