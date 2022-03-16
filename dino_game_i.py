@@ -1,7 +1,7 @@
 from microbit import *
 import random
 
-jump = 0
+status = "RUNNING"
 time = 800
 cactus_x_i = 4
 bat_x_i = 4
@@ -24,7 +24,7 @@ while True:
         dino_ii = 3
 
         #Jump_time_Start
-        jump = 1
+        status = "JUMP"
 
     #Crouch
     elif button_b.is_pressed():
@@ -32,21 +32,21 @@ while True:
         display.set_pixel(0, 4, 9)
         dino_i = 4
         dino_ii = 4
-        jump = 3
+        status = "CROUCH"
 
-    if jump == 3 and not button_b.is_pressed():
-        jump = 0
+    if status == "CROUCH" and not button_b.is_pressed():
+        status = "RUNNING"
 
     #Run
-    if jump == 0:
+    if status == "RUNNING":
         display.set_pixel(0, 3, 9)
         display.set_pixel(0, 4, 9)
         dino_i = 3
         dino_ii = 4
 
     #Jump_time_Stop
-    if jump == 1 and jump_time + time * 1.5 == running_time():
-        jump = 0
+    if status == "JUMP" and jump_time + time * 1.5 == running_time():
+        status = "RUNNING"
         display.set_pixel(0, 2, 0)
 
     #Cactus and Bats
