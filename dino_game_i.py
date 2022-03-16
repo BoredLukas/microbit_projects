@@ -76,6 +76,8 @@ while True:
     #Easy-Time
     if running_time() < 20000:
         cactus_or_bat = 0
+    else:
+        cactus_or_bat = random.randint(-1, 2)
 
     """
     #Getting harder
