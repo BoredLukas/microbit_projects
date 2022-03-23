@@ -61,8 +61,7 @@ while True:
         if cactus_x_i == -1:
             cactus_x_i = 4
             cactus_or_bat = random.randint(-1, 2)
-
-    elif cactus_or_bat == 1:
+    else:
         #Bat
         if running_time() % time == 0:
             display.set_pixel(bat_x_i, 3, 5)
