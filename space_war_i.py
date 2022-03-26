@@ -57,14 +57,14 @@ while True:
 
         if frame_time_ms % time == 0:
 
-            asteroid_x = random.randint(0, 4)
-            asteroid_count += 1
+            #asteroid_count += 1
 
             if not first == 1:
                 asteroid_y += 1
                 if asteroid_y == 5:
                     asteroid_y = 0
-
+                    asteroid_x = random.randint(0, 4)
+                    asteroid_count -= 1
                 display.set_pixel(asteroid_x, asteroid_y, 3)
                 display.set_pixel(asteroid_x, asteroid_y, 0)
                 first = 0
@@ -76,7 +76,8 @@ while True:
 
         frame_time_ms_ii = running_time()
         if frame_time_ms_ii - frame_time_ms < frame_time_single:
-            sleep(frame_time_ms_ii - frame_time_ms)
+            frame_time_rest = frame_time_ms_ii - frame_time_ms
+            sleep(frame_time_rest)
 
         # Ende
 
