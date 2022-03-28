@@ -9,7 +9,6 @@ HEIGHT = 16
 Asteroids = []
 timer = 0
 frame_time = 40 #Time one frame is shown
-fps = 50
 
 ### UTILITY FUNCTIONS
 def clear():
@@ -39,7 +38,7 @@ def display(Asteroids, HEIGHT, WIDTH):
     display = []
     for i in range(HEIGHT):
         display.append([])
-        for b in range(WIDTH):
+        for ii in range(WIDTH):
             display[i].append(' ')
     for asteroid_xy in Asteroids:
         display[asteroid_xy[1]][asteroid_xy[0]] = 'o'
