@@ -1,47 +1,70 @@
 ### IMPORT MODULE
 import random
 import os
+import time
  
 ## GAME PARAMETERS
-# State parameters of game such as WIDTH or HEIGHT of matrix.
-# Use capital letters to indicate that this are parameter with fixed values instead of variables!
 WIDTH = 8
+HEIGHT = 16
 Asteroids = []
-frame = 40 #Time one frame is shown
+timer = 0
+frame_time = 40 #Time one frame is shown
 fps = 50
 
 ### UTILITY FUNCTIONS
-# utility functions that are of general use, e.g. to manipulate strings
 def clear():
 ## CLEARS CONSOLE
-## NOTE that there are different commands for Windows and Unix-based system (Mac and Linux)
     if os.name == 'nt': os.system('cls') # Windows
     else: os.system('clear') # Unix
 
 ### MODEL FUNCTIONS
-# here write all functions that belong to the game's model/logic
-def add_random_asteroids(L, probability, WIDTH):
+def add_random_asteroids(Asteroids, given_prob, WIDTH):
     for i in range(WIDTH):
-        rate = random.randint(0, 100)
-        if rate <= probability:
+        spawn_prob = random.randint(0, 100)
+        if spawn_prob <= given_prob:
             asteroid_x = i
-            L.append([asteroid_x, 0])
-    return L
+            Asteroids.append([asteroid_x, 0])
+    return Asteroids
 
-def move_and_delete_asteroids(L):
-    pass
-
+def move_and_remove_asteroids(Asteroids_list, HEIGHT):
+    Asteroids_ii = []
+    for asteroid in Asteroids_list:
+        asteroid[1] += 1             ##Y Coordinate of Asteroid
+        if asteroid[1] < HEIGHT:
+            Asteroids_ii.append(asteroid)
+    return Asteroids_ii
 
 ### VIEW FUNCTIONS
-# Here write all functions that belong to the game's view.
-# When porting you game from e.g. normal python (console app) to mirco:bit, only these functions have to be adapted/rewritten
+def display(Asteroids, HEIGHT, WIDTH):
+    display = []
+    for i in range(HEIGHT):
+        display.append([])
+        for b in range(WIDTH):
+            display[i].append(' ')
+    for asteroid_xy in Asteroids:
+        display[asteroid_xy[1]][asteroid_xy[0]] = 'o'
+    return display
 
 ### GAME LOOP
-
+'''
 ##while True:
-add_random_asteroids(Asteroids, 10, WIDTH)
+add_random_asteroids(Asteroids, 30, WIDTH)
 print(Asteroids)
-##print(Asteroids[1])
+move_and_remove_asteroids(Asteroids)
+print(Asteroids)
+'''
+while True:
+    start_time = time.time()
+    clear()
+    Asteroids_d_show = add_random_asteroids(Asteroids, 30, WIDTH)
+    Asteroids_d_show = move_and_remove_asteroids(Asteroids, HEIGHT)
+    display_show = display(Asteroids_d_show, HEIGHT, WIDTH)
+    for line in display_show:
+        print(line)
+        stop_time = time.time()
+        if stop_time - start_time < frame_time:
+            code_pause = frame_time - (stop_time - start_time)
+            time.sleep(code_pause / 10000)
     ### UPDATE MODEL
     # here call model functions to update 
     
