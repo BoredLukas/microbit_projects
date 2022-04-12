@@ -7,8 +7,9 @@ import time
 WIDTH = 8
 HEIGHT = 16
 Asteroids = []
+probability = 30
 timer = 0
-frame_time = 40 #Time one frame is shown
+frame_time = 500 #Time one frame is shown
 
 ### UTILITY FUNCTIONS
 def clear():
@@ -35,11 +36,7 @@ def move_and_remove_asteroids(Asteroids_list, HEIGHT):
 
 ### VIEW FUNCTIONS
 def display(Asteroids, HEIGHT, WIDTH):
-    display = []
-    for i in range(HEIGHT):
-        display.append([])
-        for ii in range(WIDTH):
-            display[i].append(' ')
+    display = [[" " for i in range(WIDTH)] for j in range(HEIGHT)]
     for asteroid_xy in Asteroids:
         display[asteroid_xy[1]][asteroid_xy[0]] = 'o'
     return display
@@ -55,15 +52,15 @@ print(Asteroids)
 while True:
     start_time = time.time()
     clear()
-    Asteroids_d_show = add_random_asteroids(Asteroids, 30, WIDTH)
+    Asteroids_d_show = add_random_asteroids(Asteroids, probability, WIDTH)
     Asteroids_d_show = move_and_remove_asteroids(Asteroids, HEIGHT)
     display_show = display(Asteroids_d_show, HEIGHT, WIDTH)
     for line in display_show:
         print(line)
-        stop_time = time.time()
-        if stop_time - start_time < frame_time:
-            code_pause = frame_time - (stop_time - start_time)
-            time.sleep(code_pause / 10000)
+    stop_time = time.time()
+    if stop_time - start_time < frame_time:
+        code_pause = frame_time - (stop_time - start_time)
+        time.sleep(code_pause / 1000)
     ### UPDATE MODEL
     # here call model functions to update 
     
