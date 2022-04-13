@@ -1,0 +1,68 @@
+import pygame
+import sys
+import os
+
+### GAME PARAMETERS
+WIDTH = 12
+HEIGHT = 20
+
+# PyGame constants
+SIZE = 30
+LINE_WIDTH = 3
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+YELLOW = (255,255,0)
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
+
+### PYGAME SETUP
+# initialize, create screen and clock
+pygame.init()
+screen = pygame.display.set_mode((WIDTH*(SIZE+LINE_WIDTH)+LINE_WIDTH,HEIGHT*(SIZE+LINE_WIDTH)+LINE_WIDTH))
+screen.fill(WHITE)
+clock = pygame.time.Clock()
+
+# create squares for grid
+squares = [[0 for i in range(WIDTH)] for j in range(HEIGHT)]
+for y in range(HEIGHT):
+    for x in range(WIDTH):
+        squares[y][x] = pygame.Rect(x * (SIZE+LINE_WIDTH)+LINE_WIDTH, y * (SIZE+LINE_WIDTH)+LINE_WIDTH, SIZE, SIZE)
+
+# # image: load, rotate and scale
+image_surface = pygame.image.load(os.path.join('data','asteroid.png'))#.convert_alpha()
+image_surface = pygame.transform.rotate(image_surface,90)
+image_surface = pygame.transform.scale(image_surface,(SIZE,SIZE))
+
+# pixels which are colored
+red_squares = [[1,1],[5,10]]
+
+while True:    
+    ### KEY EVENT HANDLING
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: # Exit app when clicking quit button
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN: # Deal with keyboard input
+            if event.key == pygame.K_LEFT:
+                print("left arrow pressed")
+            if event.key == pygame.K_RIGHT:
+                print("right arrow pressed")
+
+    ### DRAW SQUARES
+    # go through all squares and color them correctly
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            rect = squares[y][x]
+            if [x,y] in red_squares: # if coords of square is (not) in list of red squares, show in red (black)
+                pygame.draw.rect(screen, RED, rect)
+            else:
+                pygame.draw.rect(screen, BLACK, rect)
+    # draw image
+    img_x, img_y = 7,7
+    asteroid_rect = image_surface.get_rect(topleft = (img_x*(SIZE+LINE_WIDTH), img_y*(SIZE+LINE_WIDTH)))
+    screen.blit(image_surface,asteroid_rect)
+
+    # update screen (i.e. draw to screen)
+    pygame.display.update()
+    clock.tick(60) # sleep, 60 means time is chosen s.t. 60fps (frames per second)
