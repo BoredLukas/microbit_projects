@@ -7,9 +7,17 @@ pygame.font.init()
 ### GAME PARAMETERS
 WIDTH = 13
 HEIGHT = 20
-PROBABILITY = 20
+
+probability = 20
 FPS = 3
-FONT = pygame.font.SysFont("arial", 50)
+game_font = pygame.font.SysFont("arial", 40)
+level = 1
+
+# pixels which are colored, asteroids)
+red_squares = []
+
+# spaceship
+spaceship = [[6,19]]
 
 # PyGame constants
 SIZE = 30
@@ -46,14 +54,8 @@ ROCKET = pygame.transform.scale(pygame.image.load(os.path.join('data','bullet.pn
 
 BACKGROUND = pygame.image.load(os.path.join('data','universe.jpg'))
 
-# pixels which are colored, asteroids)
-red_squares = []
-
-# spaceship
-spaceship = [[7,7]]
-
 # model functions
-def add_random_asteroids(Asteroids, given_prob, WIDTH):
+def add_random_asteroids(Asteroids, given_prob):
     for i in range(WIDTH):
         spawn_prob = random.randint(0, 100)
         if spawn_prob <= given_prob:
@@ -61,13 +63,25 @@ def add_random_asteroids(Asteroids, given_prob, WIDTH):
             Asteroids.append([asteroid_x, 0])
     return Asteroids
 
-def move_and_remove_asteroids(Asteroids_list, HEIGHT):
+def move_and_remove_asteroids(Asteroids_list):
     Asteroids_ii = []
     for asteroid in Asteroids_list:
         asteroid[1] += 1             ##Y Coordinate of Asteroid
         if asteroid[1] < HEIGHT:
             Asteroids_ii.append(asteroid)
     return Asteroids_ii
+
+def move_spaceship(spaceship, dir):
+    spaceship_ii = []
+    if dir == 'left':
+        spaceship[0] -= 1
+        if spaceship[0] < 0:
+            spaceship_ii.append(spaceship)
+    else:
+        spaceship[0] += 1
+        if spaceship[0] > WIDTH:
+            spaceship_ii.append(spaceship)
+    return spaceship
 
 while True:
     ### KEY EVENT HANDLING
@@ -82,7 +96,7 @@ while True:
                 print("right arrow pressed")
 
     ### SPAWNING ASTEROIDS
-    add_random_asteroids(red_squares, PROBABILITY, WIDTH)
+    add_random_asteroids(red_squares, probability)
 
     ### DRAW SQUARES
     # go through all squares and color them correctly
@@ -90,14 +104,18 @@ while True:
         for y in range(HEIGHT):
             rect = squares[y][x]
             if [x,y] in red_squares: # if coords of square is (not) in list of red squares, show in red (black)
-                asteroid_rect = image_surface.get_rect(topleft = (x*(SIZE+LINE_WIDTH), y*(SIZE+LINE_WIDTH)))
+                asteroid_rect = ASTEROID.get_rect(topleft = (x*(SIZE+LINE_WIDTH), y*(SIZE+LINE_WIDTH)))
                 SCREEN.blit(ASTEROID,asteroid_rect)
             elif [x,y] in spaceship:
-                spaceship_rect = image_surface.get_rect(topleft = (x*(SIZE+LINE_WIDTH), y*(SIZE+LINE_WIDTH)))
+                spaceship_rect = SPACESHIP.get_rect(topleft = (x*(SIZE+LINE_WIDTH), y*(SIZE+LINE_WIDTH)))
                 SCREEN.blit(SPACESHIP,spaceship_rect)
             else:
                 pygame.draw.rect(SCREEN, BLACK, rect)
-    move_and_remove_asteroids(red_squares, HEIGHT)
+
+    move_and_remove_asteroids(red_squares)
+
+    level_label = game_font.render(f"Level: {level}", 1, (255,255,255))
+    SCREEN.blit(level_label, (7,0))
 
     # update screen (i.e. draw to screen)
     pygame.display.update()
