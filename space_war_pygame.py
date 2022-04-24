@@ -76,11 +76,11 @@ def move_spaceship(spaceship, dir):
     if dir == 'left':
         spaceship[0] -= 1
         if spaceship[0] < 0:
-            spaceship_ii.append(spaceship)
+            spaceship[0] == 0
     else:
         spaceship[0] += 1
         if spaceship[0] > WIDTH:
-            spaceship_ii.append(spaceship)
+            spaceship[0] == WIDTH
     return spaceship
 
 while True:
@@ -92,6 +92,7 @@ while True:
         elif event.type == pygame.KEYDOWN: # Deal with keyboard input
             if event.key == pygame.K_LEFT:
                 print("left arrow pressed")
+                move_spaceship(spaceship, 'left')
             if event.key == pygame.K_RIGHT:
                 print("right arrow pressed")
 
