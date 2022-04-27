@@ -1,8 +1,9 @@
 ### IMPORT MODULE
+import platform
 import random
 import os
 import time
- 
+
 ## GAME PARAMETERS
 WIDTH = 8
 HEIGHT = 16
@@ -61,9 +62,12 @@ while True:
     if stop_time - start_time < frame_time:
         code_pause = frame_time - (stop_time - start_time)
         time.sleep(code_pause / 1000)
-    ### UPDATE MODEL
-    # here call model functions to update 
+
+### UPDATE MODEL
+# here call model functions to update 
     
-    ### UPDATE VIEW
-    # here call view-functions
+
+
+### UPDATE VIEW
+# here call view-functions
     
