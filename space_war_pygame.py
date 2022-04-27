@@ -72,7 +72,6 @@ def move_and_remove_asteroids(Asteroids_list):
     return Asteroids_ii
 
 def move_spaceship(spaceship, dir):
-    spaceship_ii = []
     if dir == 'left':
         spaceship[0] -= 1
         if spaceship[0] < 0:
