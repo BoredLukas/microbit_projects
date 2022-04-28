@@ -9,7 +9,7 @@ WIDTH = 13
 HEIGHT = 20
 
 probability = 20
-FPS = 3
+FPS = 5
 game_font = pygame.font.SysFont("arial", 40)
 level = 1
 
@@ -73,13 +73,13 @@ def move_and_remove_asteroids(Asteroids_list):
 
 def move_spaceship(spaceship, dir):
     if dir == 'left':
-        spaceship[0] -= 1
-        if spaceship[0] < 0:
-            spaceship[0] == 0
+        spaceship[0][0] -= 1
+        if spaceship[0][0] < 0:
+            spaceship[0][0] == 0
     else:
-        spaceship[0] += 1
-        if spaceship[0] > WIDTH:
-            spaceship[0] == WIDTH
+        spaceship[0][0] += 1
+        if spaceship[0][0] > WIDTH:
+            spaceship[0][0] == WIDTH
     return spaceship
 
 while True:
@@ -94,6 +94,8 @@ while True:
                 move_spaceship(spaceship, 'left')
             if event.key == pygame.K_RIGHT:
                 print("right arrow pressed")
+                move_spaceship(spaceship, 'right')
+            print(event.key)
 
     ### SPAWNING ASTEROIDS
     add_random_asteroids(red_squares, probability)
