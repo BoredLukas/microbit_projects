@@ -9,9 +9,10 @@ WIDTH = 13
 HEIGHT = 20
 
 probability = 20
-FPS = 5
+FPS = 3
 game_font = pygame.font.SysFont("arial", 40)
 level = 1
+game_status = True
 
 # pixels which are colored, asteroids)
 red_squares = []
@@ -82,7 +83,10 @@ def move_spaceship(spaceship, dir):
             spaceship[0][0] == WIDTH
     return spaceship
 
-while True:
+def game_over(game_status):
+    pass
+
+while game_status:
     ### KEY EVENT HANDLING
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Exit app when clicking quit button
