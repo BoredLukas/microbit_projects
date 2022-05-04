@@ -1,35 +1,32 @@
 graph = {
-    "ksr": {
-        1: {"sek": 1}, 
-        2: {"weitenzelgstr": 1}
-    },
-    "sek": {
-        1: {"bahnhofstr": 3}, 
-        2: {"hafenstr": 5}, 
-        3: {"zelgstr": 7}
-    },
-    "bahnhofstr": {
-        1: {"bahnhof": 7}
-    },
-    "hafenstr": {
-        1: {"bahnhof": 6}
-    },
-    "zelgstr": {
-        1: {"bahnhof": 5}
-    },
+    "ksr": {"sek": 1},
+    "sek": {"bahnhofstr": 3, "hafenstr": 5, "zelgstr": 7},
+    "bahnhofstr": {"bahnhof": 7},
+    "hafenstr": {"bahnhof": 6},
+    "zelgstr": {"bahnhof": 5},
     "bahnhof": {},
-    "weitenzelgstr": {},
 }
 
+START = "ksr"
+END = "bahnhof"
+SEARCH = True
+way_to_bahnhof = ["ksr"]
+
 def connection_check(graph, n1, n2):
-    x1 = "bahnhofstr" in graph["sek"]
+    x1 = n2 in graph[n1]
     return x1
 
-def way_to_bahnhof(graph):
-    way_to_bahnhof = []
-    for ways in graph["ksr"]:
-        con1 = ways in graph["ksr"]
-        if con1 == True:
-            print(con1)
-        
-way_to_bahnhof(graph)
+def find_way(given_node):
+    for node in graph[given_node]:
+        way_to_bahnhof.append(node)
+        return node
+
+node = find_way(START)
+while SEARCH:
+    node = find_way(node)
+    if node == "bahnhof":
+        SEARCH = False
+        print(way_to_bahnhof)
+    for nodes in way_to_bahnhof:
+        if nodes == node:
+            pass
