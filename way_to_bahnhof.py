@@ -23,10 +23,8 @@ def find_way(given_node):
 
 node = find_way(START)
 while SEARCH:
+    last_node = node
     node = find_way(node)
     if node == "bahnhof":
         SEARCH = False
         print(way_to_bahnhof)
-    for nodes in way_to_bahnhof:
-        if nodes == node:
-            pass
