@@ -1,6 +1,3 @@
-from tracemalloc import start
-
-
 graph = {
     "ksr": {"sek": 1},
     "sek": {"bahnhofstr": 3, "hafenstr": 5, "zelgstr": 7},
@@ -12,20 +9,18 @@ graph = {
 
 visited = ["ksr"]
 ways_to_bahnhof = {}
-start = "ksr"
-candidates = [start]
+candidates = ["ksr"]
 
 while candidates:
     node = candidates.pop(0)
     if node == "bahnhof":
         print("way found")
     else:
-        for ways in graph[start]:
+        for ways in graph[node]:
             candidates.append(ways)
-        visited.append(start)
-        old = start
-        start = candidates.pop(0)
-        ways_to_bahnhof[old]=graph[start]
+        visited.append(node)
+        parent = node
+        ways_to_bahnhof[parent]=graph[parent][node]
         print(ways_to_bahnhof)
         print(candidates)
         print(visited)
