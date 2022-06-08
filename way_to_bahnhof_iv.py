@@ -10,17 +10,22 @@ graph = {
 visited = ["ksr"]
 ways_to_bahnhof = {}
 candidates = ["ksr"]
+parent = "ksr"
 
 while candidates:
     node = candidates.pop(0)
     if node == "bahnhof":
         print("way found")
+    elif node in visited:
+        continue
+    elif not node in graph:
+        
     else:
         for ways in graph[node]:
-            candidates.append(ways)
+            candidates.append(candidates)
         visited.append(node)
-        parent = node
         ways_to_bahnhof[parent]=graph[parent][node]
+        parent = node
         print(ways_to_bahnhof)
         print(candidates)
         print(visited)
