@@ -2,6 +2,9 @@ import pygame
 import os
 import time
 import random
+import sys
+print(sys.executable)
+
 pygame.font.init()
 
 WIDTH, HEIGHT = 700, 700
