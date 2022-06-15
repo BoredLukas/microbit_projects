@@ -33,7 +33,14 @@ while candidates:
     start = check
     print(visited)
 
-
+'''
+for p_w_time in way_to_bahnhof:
+    way_time = way_time + way_to_bahnhof[p_w_time]
+if new_time > way_time:
+    way_time = new_time
+elif new_time == way_time:
+    way_time == way_time, new_time
+'''
 
 '''
 for places in graph:

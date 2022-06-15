@@ -20,6 +20,7 @@ class Person:
         year = date.strftime("%Y")
         b_year = self.birthday[5:]
         age = year - b_year
+        if 
         return(age)
 
     def change_klass(self,x=1):

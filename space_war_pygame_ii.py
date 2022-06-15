@@ -10,7 +10,7 @@ class Asteroid:
         self.x = _x
         self.y = 0
 
-    def Move(self):
+    def move(self):
         self.y += 1
 
 class Spaceship:
@@ -19,28 +19,27 @@ class Spaceship:
         self.y = _y
 
     def move(self, dir):
-            if dir == 'left':
-                self.x += 1
-            else:
+            if dir == "left":
                 self.x -= 1
+            elif dir == "right":
+                self.x += 1
 
 class Bullet:
     def __init__(self,_x,_y):
         self.x = _x
         self.y = _y
 
-
 ### GAME PARAMETERS
 WIDTH = 13
 HEIGHT = 20
 
 probability = 20
-FPS = 3
+FPS = 60
 game_font = pygame.font.SysFont("arial", 40)
 level = 1
 game_status = True
 asteroids = []
-player = Spaceship(7, 20)
+player = Spaceship(6, 19)
 
 # PyGame constants
 SIZE = 30
@@ -88,12 +87,9 @@ while game_status:
             sys.exit()
         elif event.type == pygame.KEYDOWN: # Deal with keyboard input
             if event.key == pygame.K_LEFT:
-                print("left arrow pressed")
-                Spaceship.move('left')
+                player.move("left")
             if event.key == pygame.K_RIGHT:
-                print("right arrow pressed")
-                Spaceship.move('right')
-            print(event.key)
+                player.move("right")
 
     ### SPAWNING ASTEROIDS
     #pass
@@ -103,14 +99,14 @@ while game_status:
     for x in range(WIDTH):
         for y in range(HEIGHT):
             rect = squares[y][x]
-            if [x,y] in asteroids: # if coords of square is (not) in list of red squares, show in red (black)
-                asteroid_rect = ASTEROID.get_rect(topleft = (x*(SIZE+LINE_WIDTH), y*(SIZE+LINE_WIDTH)))
-                SCREEN.blit(ASTEROID,asteroid_rect)
-            elif x == player.x and y == player.y:
-                spaceship_rect = SPACESHIP.get_rect(topleft = (x*(SIZE+LINE_WIDTH), y*(SIZE+LINE_WIDTH)))
-                SCREEN.blit(SPACESHIP,spaceship_rect)
-            else:
-                pygame.draw.rect(SCREEN, BLACK, rect)
+            pygame.draw.rect(SCREEN, BLACK, rect)
+
+    for Asteroids in asteroids:
+        asteroid_rect = ASTEROID.get_rect(topleft = (Asteroids.x*(SIZE+LINE_WIDTH), Asteroids.y*(SIZE+LINE_WIDTH)))
+        SCREEN.blit(ASTEROID,asteroid_rect)
+
+    spaceship_rect = SPACESHIP.get_rect(topleft = (player.x*(SIZE+LINE_WIDTH), player.y*(SIZE+LINE_WIDTH)))
+    SCREEN.blit(SPACESHIP,spaceship_rect)
 
     #Labels
     level_label = game_font.render(f"Level: {level}", 1, (255,255,255))
