@@ -38,7 +38,7 @@ FPS = 60
 game_font = pygame.font.SysFont("arial", 40)
 level = 1
 game_status = True
-asteroids = []
+asteroids = [Asteroid(7)]
 player = Spaceship(6, 19)
 
 # PyGame constants
@@ -75,6 +75,10 @@ SPACESHIP = pygame.transform.scale(pygame.image.load(os.path.join('data','battle
 ROCKET = pygame.transform.scale(pygame.image.load(os.path.join('data','bullet.png')),(SIZE,SIZE))
 
 BACKGROUND = pygame.image.load(os.path.join('data','universe.jpg'))
+
+def update_asteroids():
+    for Asteroid in asteroids:
+        Asteroid.x -= 1
 
 def game_over(game_status):
     pass
