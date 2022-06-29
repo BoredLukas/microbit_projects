@@ -1,9 +1,9 @@
-from microbit import *
+from microbit import*
 from datetime import datetime
 
 compass.calibrate()
 
-steps=0
+steps = 0
 mode = 1
 
 now = datetime.now()
@@ -13,13 +13,13 @@ h = now.hour
 def on_forever():
     degrees = input.compass_heading()
     if degrees < 45:
-        microbit.show("N")
+        microbit.Image.ARROW_N
     elif degrees < 135:
-        microbit.show("E")
+        microbit.Image.ARROW_E
     elif degrees < 225:
-        microbit.show("S")
+        microbit.Image.ARROW_S
     elif degrees < 315:
-        microbit.show("W")
+        microbit.Image.ARROW_W
     else:
         microbit.scroll("You're lost")
 
@@ -36,7 +36,8 @@ on_forever()
 while True:
     if pin_logo.is_touched:
         mode += 1
-        if mode
+        if mode > 3:
+            mode = 0
     if accelerometer.was_gesture('shake'):
         steps += 1
     if mode == 1:
@@ -89,6 +90,6 @@ while True:
             microbit.display.set_pixel(2,1,9)
             microbit.display.set_pixel(2,0,9)
     elif mode == 2:
-        display.scroll(steps)
+        display.scroll(steps, loop = True)
     else:
         on_forever()
