@@ -46,14 +46,14 @@ for y in range(HEIGHT):
 
 ### IMAGES
 
-ASTEROID = pygame.transform.rotate(pygame.image.load(os.path.join('data','asteroid.png')),90)
+ASTEROID = pygame.transform.rotate(pygame.image.load(os.path.join('space_war\pygame\data','asteroid.png')),90)
 ASTEROID = pygame.transform.scale(ASTEROID,(SIZE,SIZE))
 
-SPACESHIP = pygame.transform.scale(pygame.image.load(os.path.join('data','battleship.png')),(SIZE,SIZE))
+SPACESHIP = pygame.transform.scale(pygame.image.load(os.path.join('space_war\pygame\data','battleship.png')),(SIZE,SIZE))
 
-ROCKET = pygame.transform.scale(pygame.image.load(os.path.join('data','bullet.png')),(SIZE,SIZE))
+ROCKET = pygame.transform.scale(pygame.image.load(os.path.join('space_war\pygame\data','bullet.png')),(SIZE,SIZE))
 
-BACKGROUND = pygame.image.load(os.path.join('data','universe.jpg'))
+BACKGROUND = pygame.image.load(os.path.join('space_war\pygame\data','universe.jpg'))
 
 # model functions
 def add_random_asteroids(Asteroids, given_prob):
